@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadios más famosos del mundo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Estadios más famosos del mundo</h3>
+            <label for="tipo">País:</label>
+            <select id="tipo">
+                <option value="">Seleccionar país</option>
+                <option value="España">España</option>
+                <option value="Reino Unido">Reino Unido</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Alemania">Alemania</option>
+                <option value="México">México</option>
+                <option value="Rusia">Rusia</option>
+            </select>
+            <label for="orden">Ordenación:</label>
+            <select id="orden">
+                <option value="asc">Ascendente</option>
+                <option value="desc">Descendente</option>
+            </select>
+            <label for="search">Filtrar por nombre:</label>
+            <input type="text" id="search" placeholder="Filtrar por nombre...">
+            <div id="drop-zone">Arrastra aquí un archivo CSV</div>
+            <div id="error-message" class="error"></div>
+            <ul id="lista-puntos"></ul>
+            <p id="total">Número total: 0</p>
+            <button id="clear">Limpiar</button>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
