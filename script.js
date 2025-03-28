@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function eliminarPunto(index) {  
-        if (confirm("¿Estás seguro de que quieres eliminar el punto de interés?")) {  
+        if (confirm("¿Quieres eliminar el punto de interés?")) {  
             puntosInteres.splice(index, 1);  
             mostrarPuntos(); 
         }
