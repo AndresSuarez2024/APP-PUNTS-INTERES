@@ -1,4 +1,9 @@
-class Controlador {
+// js/Controlador.js
+import { Interfaz } from './interfaz.js';
+import { Mapa } from './mapa.js';
+import { PuntosDeInteres } from './puntosDeInteres.js';
+
+export class Controlador {
     constructor() {
         this.mapa = new Mapa();
         this.puntosDeInteres = new PuntosDeInteres();
@@ -6,6 +11,8 @@ class Controlador {
     }
 
     iniciar() {
+        this.interfaz.setEliminarPuntoCallback(this.eliminarPunto.bind(this));
+
         this.interfaz.dropZone.addEventListener("dragover", e => e.preventDefault());
         this.interfaz.dropZone.addEventListener("drop", this.handleFileDrop.bind(this));
 
@@ -41,7 +48,29 @@ class Controlador {
             this.interfaz.tipoSelect.value,
             this.interfaz.ordenSelect.value
         );
-        this.interfaz.mostrarListaPuntos(puntosFiltrados, this.mapa);
+        this.interfaz.mostrarListaPuntos(puntosFiltrados);
+        this.mostrarMarcadores(puntosFiltrados);
+    }
+
+    mostrarMarcadores(puntos) {
+        this.mapa.limpiarMarcadores();
+        puntos.forEach(punto => {
+            const popupContent = `
+                <b>${punto.nombre}</b><br>
+                Tipo: ${punto.tipo}<br>
+                Capacidad: ${punto.capacidad}<br>
+                <img src="${punto.imagenEstadio}" alt="Imagen de ${punto.nombre}" style="width: 150px;">
+            `;
+            this.mapa.agregarMarcador(punto.lat, punto.lng, popupContent);
+        });
+    }
+
+    eliminarPunto(index) {
+        // Eliminar el punto de la lista
+        this.puntosDeInteres.eliminarPunto(index);
+
+        // Actualizar la vista después de la eliminación
+        this.actualizarVista();
     }
 
     limpiarTodo() {
